@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lanrenspace.kakami.mapper.AnonymousResourceMapper">
+    <resultMap id="BaseResultMap" type="com.lanrenspace.kakami.entity.AnonymousResource">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="app_id" property="appId" jdbcType="VARCHAR"/>
+        <result column="type" property="type" jdbcType="BIGINT"/>
+        <result column="url" property="url" jdbcType="VARCHAR"/>
+        <result column="http_method" property="httpMethod" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_code" property="createCode" jdbcType="VARCHAR"/>
+        <result column="create_name" property="createName" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_code" property="updateCode" jdbcType="VARCHAR"/>
+        <result column="update_name" property="updateName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="batchInsert" parameterType="java.util.List">
+        INSERT INTO
+        anonymous_resource(app_id,type,url,http_method,description,delete_flag,create_time,create_code,create_name,update_time,update_code,update_name)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.appId},#{item.type},#{item.url},#{item.httpMethod},#{item.description},#{item.deleteFlag},#{item.createTime},#{item.createCode},#{item.createName},#{item.updateTime},#{item.updateCode},#{item.updateName})
+        </foreach>
+    </select>
+</mapper>

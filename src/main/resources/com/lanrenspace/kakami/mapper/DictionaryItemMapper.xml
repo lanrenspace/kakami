@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lanrenspace.kakami.mapper.DictionaryItemMapper">
+    <resultMap id="BaseResultMap" type="com.lanrenspace.kakami.entity.DictionaryItem">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="dictionary_code" property="dictionaryCode" jdbcType="VARCHAR"/>
+        <result column="item_code" property="itemCode" jdbcType="VARCHAR"/>
+        <result column="item_name" property="itemName" jdbcType="VARCHAR"/>
+        <result column="item_value" property="itemValue" jdbcType="VARCHAR"/>
+        <result column="order_num" property="orderNum" jdbcType="BIGINT"/>
+        <result column="updatable" property="updatable" jdbcType="BIGINT"/>
+        <result column="tenant_code" property="tenantCode" jdbcType="VARCHAR"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIGINT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="create_code" property="createCode" jdbcType="VARCHAR"/>
+        <result column="create_name" property="createName" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="update_code" property="updateCode" jdbcType="VARCHAR"/>
+        <result column="update_name" property="updateName" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.lanrenspace.kakami.entity.DictionaryItem">
+        INSERT INTO dictionary_item(id, dictionary_code, item_code, item_name, item_value, order_num, updatable,
+                                    tenant_code,
+                                    delete_flag, create_time, create_code, create_name, update_time, update_code,
+                                    update_name)
+        VALUES (id, dictionaryCode, itemCode, itemName, itemValue, orderNum, updatable, tenantCode,
+                deleteFlag, createTime, createCode, createName, updateTime, updateCode,
+                updateName)
+    </insert>
+
+    <select id="selectByCondition" parameterType="com.lanrenspace.kakami.entity.DictionaryItem"
+            resultMap="BaseResultMap">
+        select * from dictionary_item where delete_flag = 0
+        <if test="dictionaryCode != null and dictionaryCode != ''">
+            dictionary_code = #{dictionaryCode}
+        </if>
+    </select>
+</mapper>
